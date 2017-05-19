@@ -16,13 +16,14 @@
 <script>
 import { mapState } from 'vuex'
 
-function getModifiersFor (store, locationName, behaviorName) {
-  const location = store.data[locationName]
-  if (!location) {
-    return []
-  }
-  // const behaviors = getBehaviorsFor(store, locationName)
-  const behaviors = location.behaviors
+function getBehaviorsForLocation (store, locationId) {
+  const location = store.data[locationId]
+  if (!location) return []
+  return location.behaviors
+}
+
+function getModifiersFor (store, locationId, behaviorName) {
+  const behaviors = getBehaviorsForLocation(store, locationId)
   const behavior = behaviors.filter((behavior) => {
     return (behavior.name === behaviorName)
   })[0]
