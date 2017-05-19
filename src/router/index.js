@@ -14,7 +14,7 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
-    }
+    },
     {
       // list available ethograms
       path: '/observation_sessions/start',
