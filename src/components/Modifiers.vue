@@ -16,22 +16,26 @@
 <script>
 import { mapState } from 'vuex'
 
+function getModifiersFor (store, locationName, behaviorName) {
+  const location = store.data[locationName]
+  if (!location) {
+    return []
+  }
+  // const behaviors = getBehaviorsFor(store, locationName)
+  const behaviors = location.behaviors
+  const behavior = behaviors.filter((behavior) => {
+    return (behavior.name === behaviorName)
+  })[0]
+  const modifiers = behavior.modifiers
+  return modifiers
+}
+
 export default {
   name: 'locations',
   computed: {
     ...mapState('ethograms', {
       modifiers (store) {
-        const locationName = 'Panda Zoo'
-        const behaviorName = 'walking'
-        const location = store.ethograms.filter((ethogram) => {
-          return (ethogram.name === locationName)
-        })[0]
-        const behaviors = location.ethogram.behaviors
-        const behavior = behaviors.filter((behavior) => {
-          return (behavior.name === behaviorName)
-        })[0]
-        const modifiers = behavior.modifiers
-        return modifiers
+        return getModifiersFor(store, 123, 'walking')
       }
     })
   },
@@ -40,6 +44,9 @@ export default {
     onAlertMe (e) {
       alert('hi')
     }
+  },
+  beforeMount () {
+    return this.$store.dispatch('ethograms/fetchAll')
   }
 }
 </script>

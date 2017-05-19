@@ -7,11 +7,13 @@ import configureStore from './store'
 
 Vue.config.productionTip = false
 
+const store = configureStore()
+
 /* eslint-disable no-new */
 window.mainVM = new Vue({
   el: '#app',
   router,
   template: '<App/>',
   components: { App },
-  store: configureStore()
+  store
 })
