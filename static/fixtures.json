@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "id": 123,
+      "name": "Cat Observations 2017",
+      "subjects": ["Miles", "Lulu", "Momo", "Minerva"],
+      "behaviors": [
+        {"name": "walking", "modifiers": ["quickly", "slowly"], "hasTarget": false},
+        {"name": "fighting", "modifiers": [], "hasTarget": true}
+      ]
+    }
+  ]
+}
