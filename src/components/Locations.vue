@@ -6,7 +6,7 @@
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
       <div v-for="location in locations">
         <a href="/animals.html" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
-          {{ location }}
+          {{ location.name }}
         </a>
       </div>
     </div>
@@ -21,9 +21,7 @@ export default {
   computed: {
     ...mapState('ethograms', {
       locations (store) {
-        return store.ethograms.map((ethogram) => {
-          return ethogram.name
-        })
+        return store.data
       }
     })
   },
