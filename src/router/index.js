@@ -6,6 +6,8 @@ import Animals from '@/components/Animals'
 import Behaviors from '@/components/Behaviors'
 import Modifiers from '@/components/Modifiers'
 
+import ObservationSessionsStart from '@/components/ObservationSessions/Start'
+
 Vue.use(Router)
 
 export default new Router({
@@ -46,7 +48,8 @@ export default new Router({
     {
       // list available ethograms
       path: '/observation_sessions/start',
-      name: 'ObservationSessions.Start'
+      name: 'ObservationSessions.Start',
+      component: ObservationSessionsStart
     },
     {
       // subject names buttons

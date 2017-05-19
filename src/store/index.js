@@ -9,6 +9,9 @@ Vue.use(Vuex)
 export default function configureStore () {
   return new Vuex.Store({
     state: {},
-    modules: { login, ethograms }
+    modules: {
+      login,
+      ethograms
+    }
   })
 }
