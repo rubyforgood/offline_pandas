@@ -13,10 +13,16 @@ export default {
 
   // Send a request to the login URL and save the returned JWT
   login (context, creds) {
-    fetch(LOGIN_URL, {
+    const request = new Request(LOGIN_URL, {
       method: 'POST',
-      body: creds
-    }).then((response) => {
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(creds)
+    })
+
+    return fetch(request)
+    .then((response) => {
       return response.json()
     }).then((data) => {
       localStorage.setItem('id_token', data.id_token)
