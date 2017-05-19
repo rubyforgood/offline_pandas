@@ -23,7 +23,7 @@ export default {
   actions: {
     fetchAll ({ commit }) {
       commit('setLoading')
-      fetch('/static/fixtures.json')
+      fetch('/api/ethograms')
         .then(response => response.json())
         .then(response => commit('setData', { data: response.data }))
         .catch(error => commit('setError', { error }))
