@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <img src="../assets/renee-the-panda.png">
     <h1>Welcome!</h1>
     <h2> Please login</h2>
     <form v-on:submit.prevent="onSubmit">
@@ -38,3 +39,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .login {
+    padding-top: 60px;
+  }
+</style>
