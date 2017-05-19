@@ -16,8 +16,18 @@
 <script>
 import { mapState } from 'vuex'
 
+function getLocation (store, locationId) {
+  return store.data[locationId]
+}
+//
+// function getSubjectsForLocation (store, locationId) {
+//   const location = getLocation(store, locationId)
+//   if (!location) return []
+//   return location.subjects
+// }
+
 function getBehaviorsForLocation (store, locationId) {
-  const location = store.data[locationId]
+  const location = getLocation(store, locationId)
   if (!location) return []
   return location.behaviors
 }
