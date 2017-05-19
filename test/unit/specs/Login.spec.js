@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Login from '@/components/Login'
+import configureStore from '@/store'
 
 describe('Login.vue', () => {
   it('should render correct contents', () => {
