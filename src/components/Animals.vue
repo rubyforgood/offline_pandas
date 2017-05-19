@@ -15,17 +15,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getSubjectsForLocation } from '@/utils/getEthogramData'
 
 export default {
   name: 'locations',
   computed: {
     ...mapState('ethograms', {
       subjects (store) {
-        const locationName = 'Panda Zoo'
-        const location = store.ethograms.filter((ethogram) => {
-          return (ethogram.name === locationName)
-        })[0]
-        return location.ethogram.subjects
+        return getSubjectsForLocation(store, 123)
       }
     })
   },
