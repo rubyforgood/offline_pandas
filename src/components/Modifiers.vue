@@ -31,9 +31,6 @@ export default {
     onAlertMe (e) {
       alert('hi')
     }
-  },
-  beforeMount () {
-    return this.$store.dispatch('ethograms/fetchAll')
   }
 }
 </script>

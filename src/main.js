@@ -8,6 +8,7 @@ import configureStore from './store'
 Vue.config.productionTip = false
 
 const store = configureStore()
+store.dispatch('ethograms/fetchAll')
 
 /* eslint-disable no-new */
 window.mainVM = new Vue({
