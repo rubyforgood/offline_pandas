@@ -27,7 +27,6 @@ export default {
   methods: {
     submit (e) {
       e.preventDefault()
-
       var credentials = {
         email: this.credentials.email,
         password: this.credentials.password
