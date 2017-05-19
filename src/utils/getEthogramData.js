@@ -14,6 +14,11 @@ export function getBehaviorsForLocation (store, locationId) {
   return location.behaviors
 }
 
+export function getBehaviorNamesForLocation (store, locationId) {
+  const behaviors = getBehaviorsForLocation(store, locationId)
+  return behaviors.map(behavior => behavior.name)
+}
+
 export function getModifiersFor (store, locationId, behaviorName) {
   const behaviors = getBehaviorsForLocation(store, locationId)
   const behavior = behaviors.filter((behavior) => {

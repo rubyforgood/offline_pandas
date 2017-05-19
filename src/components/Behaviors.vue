@@ -15,21 +15,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getBehaviorNamesForLocation } from '@/utils/getEthogramData'
 
 export default {
   name: 'locations',
   computed: {
     ...mapState('ethograms', {
       behaviors (store) {
-        const locationName = 'Panda Zoo'
-        const location = store.ethograms.filter((ethogram) => {
-          return (ethogram.name === locationName)
-        })[0]
-        const behaviors = location.ethogram.behaviors
-        const behaviorNames = behaviors.map((behavior) => {
-          return behavior.name
-        })
-        return behaviorNames
+        return getBehaviorNamesForLocation(store, 123)
       }
     })
   },
@@ -38,6 +31,9 @@ export default {
     onAlertMe (e) {
       alert('hi')
     }
+  },
+  beforeMount () {
+    return this.$store.dispatch('ethograms/fetchAll')
   }
 }
 </script>
