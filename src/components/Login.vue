@@ -3,7 +3,6 @@
     <h1>Welcome!</h1>
     <h2> Please login</h2>
     <form v-on:submit.prevent="onSubmit">
-      <input type="hidden" name="token" v-bind:value="jwtToken" />
       <input type="text" name="email" placeholder="Email" v-model="credentials.email" />
       <input type="password" name="password" placeholder="Password" v-model="credentials.password" />
       <input type="submit" class="btn btn-primary" value="Log In" />
@@ -19,7 +18,6 @@ export default {
   name: 'login',
   computed: {
     ...mapState('login', {
-      jwtToken: 'token',
       credentials: 'credentials',
       error: 'error'
     })

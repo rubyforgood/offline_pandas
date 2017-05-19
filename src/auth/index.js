@@ -25,8 +25,7 @@ export default {
     .then((response) => {
       return response.json()
     }).then((data) => {
-      localStorage.setItem('id_token', data.id_token)
-      localStorage.setItem('access_token', data.access_token)
+      localStorage.setItem('jwt_token', data.jwt_token)
 
       this.user.authenticated = true
 
@@ -39,13 +38,12 @@ export default {
 
   // To log out, we just need to remove the token
   logout () {
-    localStorage.removeItem('id_token')
-    localStorage.removeItem('access_token')
+    localStorage.removeItem('jwt_token')
     this.user.authenticated = false
   },
 
   checkAuth () {
-    var jwt = localStorage.getItem('id_token')
+    var jwt = localStorage.getItem('jwt_token')
     if (jwt) {
       this.user.authenticated = true
     } else {
@@ -56,7 +54,7 @@ export default {
   // The object to be passed as a header for authenticated requests
   getAuthHeader () {
     return {
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      'Authorization': 'Token ' + localStorage.getItem('jwt_token')
     }
   }
 }
