@@ -3,7 +3,12 @@ import { v4 } from 'uuid'
 export default {
   namespaced: true,
   state: {
-    data: {}
+    data: {
+      123: {
+        id: 123,
+        locationId: 123
+      }
+    }
   },
   mutations: {
     setObservation (state, observation) {

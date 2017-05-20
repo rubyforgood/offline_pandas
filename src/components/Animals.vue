@@ -15,18 +15,18 @@
 
 <script>
 import Vue from 'vue'
-import { mapState } from 'vuex'
 import { getSubjectsForLocation } from '@/utils/getEthogramData'
 
 export default Vue.component('child', {
   name: 'locations',
   props: ['observationId'],
   computed: {
-    ...mapState('ethograms', {
-      subjects (store) {
-        return getSubjectsForLocation(store, 123)
-      }
-    })
+    subjects () {
+      const observationId = this.$router.currentRoute.params.id
+      const observation = this.$store.state.observations.data[observationId]
+      const locationId = parseInt(observation.locationId)
+      return getSubjectsForLocation(this.$store.state.ethograms, locationId)
+    }
   },
 
   methods: {
