@@ -2,7 +2,7 @@
   <div v-if="data">
     <Animals :observation-id="observationId"></Animals>
     <Behaviors :observation-id="observationId"></Behaviors>
-    <Modifiers></Modifiers>
+    <Modifiers :observation-id="observationId"></Modifiers>
   </div>
 </template>
 

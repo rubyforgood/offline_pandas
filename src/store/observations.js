@@ -6,7 +6,8 @@ export default {
     data: {
       123: {
         id: 123,
-        locationId: 123
+        locationId: 123,
+        actionName: 'walking'
       }
     }
   },

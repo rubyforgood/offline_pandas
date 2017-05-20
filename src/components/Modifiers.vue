@@ -14,17 +14,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { getLocationIdForObservationId, getActionNameForObservationId } from '@/utils/getObservationData'
 import { getModifiersFor } from '@/utils/getEthogramData'
 
 export default {
   name: 'locations',
+  props: ['observationId'],
   computed: {
-    ...mapState('ethograms', {
-      modifiers (store) {
-        return getModifiersFor(store, 123, 'walking')
-      }
-    })
+    modifiers () {
+      const locationId = getLocationIdForObservationId(this.$store.state.observations, this.observationId)
+      const actionName = getActionNameForObservationId(this.$store.state.observations, this.observationId)
+      return getModifiersFor(this.$store.state.ethograms, locationId, actionName)
+    }
   },
   methods: {
     onAlertMe (e) {
