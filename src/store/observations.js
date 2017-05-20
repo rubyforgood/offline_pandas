@@ -24,19 +24,7 @@ export default {
     }
   },
   mutations: {
-    setObservation (state, observation) {
-      Vue.set(state.data, observation.id, observation)
-    },
-    setSubject (state, { observationId, subject }) {
-      const observation = { ...state.data[observationId], subject }
-      Vue.set(state.data, observation.id, observation)
-    },
-    setAction (state, { observationId, actionName }) {
-      const observation = { ...state.data[observationId], actionName }
-      Vue.set(state.data, observation.id, observation)
-    },
-    setModifier (state, { observationId, modifierName }) {
-      const observation = { ...state.data[observationId], modifierName }
+    storeObservation (state, observation) {
       Vue.set(state.data, observation.id, observation)
     }
   },
@@ -47,17 +35,23 @@ export default {
         id: newId,
         locationId
       }
-      commit('setObservation', newObservation)
+      commit('storeObservation', newObservation)
       return newObservation
     },
     assignSubject ({ state, commit }, { observationId, subjectName }) {
-      commit('setSubject', { observationId, subject: subjectName })
+      const observation = {
+        ...state.data[observationId],
+        subject: subjectName
+      }
+      commit('storeObservation', observation)
     },
     assignAction ({ state, commit }, { observationId, actionName }) {
-      commit('setAction', { observationId, actionName })
+      const observation = { ...state.data[observationId], actionName }
+      commit('storeObservation', observation)
     },
     assignModifier ({ state, commit }, { observationId, modifierName }) {
-      commit('setModifier', { observationId, modifierName })
+      const observation = { ...state.data[observationId], modifierName }
+      commit('storeObservation', observation)
     }
   }
 }
