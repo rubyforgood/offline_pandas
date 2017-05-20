@@ -30,7 +30,7 @@ export default {
       data: 'data'
     }),
     observationId () {
-      return parseInt(this.$router.currentRoute.params.id)
+      return this.$router.currentRoute.params.id
     },
     onAnimalStep () {
       return Boolean(!this.animalIsSelected)
