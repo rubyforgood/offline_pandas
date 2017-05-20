@@ -1,4 +1,5 @@
 import { v4 } from 'uuid'
+import Vue from 'vue'
 
 export default {
   namespaced: true,
@@ -23,10 +24,10 @@ export default {
   },
   mutations: {
     setObservation (state, observation) {
-      state.data[observation.id] = observation
+      Vue.set(state.data, observation.id, observation)
     },
-    setSubject (state, observation, subject) {
-      state.data[observation.id] = observation
+    setSubject (state, {observation, subject}) {
+      Vue.set(state.data[observation.id], 'subject', subject)
     }
   },
   actions: {
@@ -36,11 +37,9 @@ export default {
       commit('setObservation', newObservation)
       return newObservation
     },
-    assignSubject ({ commit }, subjectName) {
-      // should grab the current observation here - or have it passed in and modify it?
-      const observation = { id: 123, locationId: 123, subject: subjectName }
-      commit('setObservation', observation)
-      return observation
+    assignSubject ({ state, commit }, { observationId, subjectName }) {
+      const observation = state.data[observationId]
+      commit('setSubject', { observation, subject: subjectName })
     }
   }
 }

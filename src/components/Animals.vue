@@ -4,9 +4,9 @@
       <div class="flex-auto pa1 tc">Subjects for {{ observationId }}</div>
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
-      <div v-for="subject in subjects">
-        <a @click="assignSubject(subject)" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
-          {{ subject }}
+      <div v-for="subjectName in subjects">
+        <a @click="assignSubject({ observationId, subjectName })" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
+          {{ subjectName }}
         </a>
       </div>
     </div>
