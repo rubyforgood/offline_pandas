@@ -10,7 +10,7 @@
       <input class="w5 pa2" type="password" name="password" placeholder="Password" v-model="credentials.password" />
     </div>
     <div class="pv2">
-      <input type="submit" class="bg-green b--green white ba pv2 ph3" value="Log In" v-on:click="onSubmit" />
+      <input type="submit" class="bg-green b--green white ba pv2 ph3 br1" value="Log In" v-on:click="onSubmit" />
     </div>
   </div>
 </template>
