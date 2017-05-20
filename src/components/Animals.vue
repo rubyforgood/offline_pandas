@@ -5,7 +5,7 @@
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
       <div v-for="subject in subjects">
-        <a href="/animals.html" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
+        <a @click="assignSubject(subject)" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
           {{ subject }}
         </a>
       </div>
@@ -15,6 +15,7 @@
 
 <script>
 import Vue from 'vue'
+import { mapActions } from 'vuex'
 import { getSubjectsForLocation } from '@/utils/getEthogramData'
 import { getLocationIdForObservationId } from '@/utils/getObservationData'
 
@@ -29,9 +30,9 @@ export default Vue.component('child', {
   },
 
   methods: {
-    onAlertMe (e) {
-      alert('hi')
-    }
+    ...mapActions('observations', [
+      'assignSubject'
+    ])
   }
 })
 </script>

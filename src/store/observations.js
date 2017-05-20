@@ -24,6 +24,9 @@ export default {
   mutations: {
     setObservation (state, observation) {
       state.data[observation.id] = observation
+    },
+    setSubject (state, observation, subject) {
+      state.data[observation.id] = observation
     }
   },
   actions: {
@@ -32,6 +35,12 @@ export default {
       const newObservation = { id: newId, locationId }
       commit('setObservation', newObservation)
       return newObservation
+    },
+    assignSubject ({ commit }, subjectName) {
+      // should grab the current observation here - or have it passed in and modify it?
+      const observation = { id: 123, locationId: 123, subject: subjectName }
+      commit('setObservation', observation)
+      return observation
     }
   }
 }
