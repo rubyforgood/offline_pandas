@@ -7,6 +7,7 @@ export default {
       123: {
         id: 123,
         locationId: 123,
+        subject: 'Pamela',
         actionName: 'walking'
       }
     }
