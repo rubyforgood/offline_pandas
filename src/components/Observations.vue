@@ -48,7 +48,7 @@ export default {
       return Boolean(this.$store.state.observations.data[this.observationId].actionName)
     },
     modifierIsSelected () {
-      return Boolean(this.$store.state.observations.data[this.observationId].modifier)
+      return Boolean(this.$store.state.observations.data[this.observationId].modifierName)
     }
   }
 }

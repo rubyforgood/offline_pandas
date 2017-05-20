@@ -18,7 +18,8 @@ export default {
         id: 123,
         locationId: 123,
         subject: 'Pamela',
-        actionName: 'walking'
+        actionName: 'walking',
+        modifierName: 'quickly'
       }
     }
   },
@@ -31,6 +32,9 @@ export default {
     },
     setAction (state, {observationId, actionName}) {
       Vue.set(state.data[observationId], 'actionName', actionName)
+    },
+    setModifier (state, {observationId, modifierName}) {
+      Vue.set(state.data[observationId], 'modifierName', modifierName)
     }
   },
   actions: {
@@ -45,6 +49,9 @@ export default {
     },
     assignAction ({ state, commit }, { observationId, actionName }) {
       commit('setAction', { observationId, actionName })
+    },
+    assignModifier ({ state, commit }, { observationId, modifierName }) {
+      commit('setModifier', { observationId, modifierName })
     }
   }
 }

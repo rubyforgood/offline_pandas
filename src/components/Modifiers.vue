@@ -4,9 +4,9 @@
       <div class="flex-auto pa1 tc">Modifiers</div>
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
-      <div v-for="modifier in modifiers">
-        <a href="/animals.html" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
-          {{ modifier }}
+      <div v-for="modifierName in modifiers">
+        <a @click="assignModifier({ observationId, modifierName })" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
+          {{ modifierName }}
         </a>
       </div>
     </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { getLocationIdForObservationId, getActionNameForObservationId } from '@/utils/getObservationData'
 import { getModifiersFor } from '@/utils/getEthogramData'
 
@@ -28,9 +29,9 @@ export default {
     }
   },
   methods: {
-    onAlertMe (e) {
-      alert('hi')
-    }
+    ...mapActions('observations', [
+      'assignModifier'
+    ])
   }
 }
 </script>
