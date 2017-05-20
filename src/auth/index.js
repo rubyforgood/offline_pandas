@@ -1,7 +1,7 @@
 import router from '../router'
 
 // URL and endpoint constants
-const API_URL = process.env.NODE_ENV === 'production' ? 'https://save-the-animals.herokuapp.com/' : 'http://localhost:3000/'
+export const API_URL = process.env.NODE_ENV === 'production' ? 'https://save-the-animals.herokuapp.com/' : 'http://localhost:3000/'
 const LOGIN_URL = API_URL + 'api/auth'
 
 export default {
@@ -52,9 +52,7 @@ export default {
   },
 
   // The object to be passed as a header for authenticated requests
-  getAuthHeader () {
-    return {
-      'Authorization': 'Token ' + localStorage.getItem('jwt_token')
-    }
+  token () {
+    return localStorage.getItem('jwt_token')
   }
 }
