@@ -1,5 +1,5 @@
 export function locallyStoredObservations () {
-  return JSON.parse(localStorage.getItem('observations'))
+  return JSON.parse(localStorage.getItem('observations')) || {}
 }
 
 export function unpersistedObservations () {
