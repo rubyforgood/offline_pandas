@@ -5,6 +5,7 @@ import Locations from '@/components/Locations'
 import Animals from '@/components/Animals'
 import Behaviors from '@/components/Behaviors'
 import Modifiers from '@/components/Modifiers'
+import Observations from '@/components/Observations'
 
 import ObservationSessionsStart from '@/components/ObservationSessions/Start'
 
@@ -44,6 +45,11 @@ export default new Router({
       path: '/modifiers',
       name: 'Modifiers',
       component: Modifiers
+    },
+    {
+      path: '/observations/:id',
+      name: 'Observations',
+      component: Observations
     },
     {
       // list available ethograms
