@@ -28,6 +28,9 @@ export default {
     },
     setSubject (state, {observationId, subject}) {
       Vue.set(state.data[observationId], 'subject', subject)
+    },
+    setAction (state, {observationId, actionName}) {
+      Vue.set(state.data[observationId], 'actionName', actionName)
     }
   },
   actions: {
@@ -39,6 +42,9 @@ export default {
     },
     assignSubject ({ state, commit }, { observationId, subjectName }) {
       commit('setSubject', { observationId, subject: subjectName })
+    },
+    assignAction ({ state, commit }, { observationId, actionName }) {
+      commit('setAction', { observationId, actionName })
     }
   }
 }

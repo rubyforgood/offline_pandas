@@ -4,9 +4,9 @@
       <div class="flex-auto pa1 tc">Behaviors</div>
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
-      <div v-for="behavior in behaviors">
-        <a href="/animals.html" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
-          {{ behavior }}
+      <div v-for="actionName in behaviors">
+        <a @click="assignAction({ observationId, actionName })" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
+          {{ actionName }}
         </a>
       </div>
     </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { getBehaviorNamesForLocation } from '@/utils/getEthogramData'
 import { getLocationIdForObservationId } from '@/utils/getObservationData'
 
@@ -27,9 +28,9 @@ export default {
     }
   },
   methods: {
-    onAlertMe (e) {
-      alert('hi')
-    }
+    ...mapActions('observations', [
+      'assignAction'
+    ])
   }
 }
 </script>
