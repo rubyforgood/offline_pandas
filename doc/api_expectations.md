@@ -23,22 +23,23 @@
 **POST /observation_sessions**
 
 {
-  "observation_session": {
-    "observations": [
-      {
-        "id": "uuid-goes-here",
-        "timestamp": "2017-05-19T01:15:09.728Z",
-        "subject": "Minerva",
-        "behavior": "walking",
-        "modifier": "quickly"
-      },
-      {
-        "id": "other-uuid-goes-here",
-        "timestamp": "2017-05-19T01:15:09.728Z",
-        "subject": "Minerva",
-        "behavior": "fighting",
-        "target": "Lulu"
-      }
-    ]
-  }
+  "sent_at": "2017-05-19T01:15:09.728Z",
+  "observations": [
+    {
+      "id": "uuid-goes-here",
+      "observation_session_id": "uuid-goes-here",
+      "timestamp": "2017-05-19T01:15:09.728Z",
+      "subject": "Minerva",
+      "behavior": "walking",
+      "modifier": "quickly"
+    },
+    {
+      "id": "other-uuid-goes-here",
+      "observation_session_id": "uuid-goes-here",
+      "timestamp": "2017-05-19T01:15:09.728Z",
+      "subject": "Minerva",
+      "behavior": "fighting",
+      "target": "Lulu"
+    }
+  ]
 }

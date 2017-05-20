@@ -4,11 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import configureStore from './store'
+import ServerSyncRunner from './sync'
 
 Vue.config.productionTip = false
 
 const store = configureStore()
 store.dispatch('ethograms/fetchAll')
+
+const serverSync = new ServerSyncRunner()
+serverSync.run()
 
 /* eslint-disable no-new */
 window.mainVM = new Vue({
