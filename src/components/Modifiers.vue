@@ -1,7 +1,7 @@
 <template>
   <div class="bg-washed-blue">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
-      <div class="flex-auto pa1 tc">Environments</div>
+      <div class="flex-auto pa1 tc">Modifiers</div>
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
       <div v-for="modifier in modifiers">
