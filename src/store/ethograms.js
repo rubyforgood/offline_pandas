@@ -12,6 +12,9 @@ export default {
       state.loading = false
       state.data = keyBy(data, 'id')
     },
+    rehydrateData (state, { data }) {
+      state.data = data
+    }
     setLoading (state) {
       state.loading = true
     },

@@ -12,14 +12,16 @@ import {
 } from './utils/observationPersistence'
 import FakeNetworkStatus from './utils/FakeNetworkStatus'
 import Clock from './utils/Clock'
+import NetworkStatusPlugin from './utils/NetworkStatusPlugin'
 
 Vue.config.productionTip = false
 
-const store = configureStore()
-store.dispatch('ethograms/fetchAll')
-
 const clock = new Clock()
 const networkStatus = new FakeNetworkStatus()
+Vue.use(NetworkStatusPlugin, { networkStatus })
+
+const store = configureStore()
+
 const serverSync = new ServerSyncRunner({ clock, networkStatus })
 serverSync.run()
 
