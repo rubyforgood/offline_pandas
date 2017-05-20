@@ -3,7 +3,7 @@ import { keyBy } from 'lodash'
 export default {
   namespaced: true,
   state: {
-    data: {},
+    data: null,
     loading: false,
     error: null
   },

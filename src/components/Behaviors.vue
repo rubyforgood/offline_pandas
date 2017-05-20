@@ -1,12 +1,12 @@
 <template>
   <div class="bg-washed-blue">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
-      <div class="flex-auto pa1 tc">Environments</div>
+      <div class="flex-auto pa1 tc">Behaviors</div>
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
-      <div v-for="behavior in behaviors">
-        <a href="/animals.html" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
-          {{ behavior }}
+      <div v-for="actionName in behaviors">
+        <a @click="assignAction({ observationId, actionName })" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
+          {{ actionName }}
         </a>
       </div>
     </div>
@@ -14,23 +14,23 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import { getBehaviorNamesForLocation } from '@/utils/getEthogramData'
+import { getLocationIdForObservationId } from '@/utils/getObservationData'
 
 export default {
   name: 'locations',
+  props: ['observationId'],
   computed: {
-    ...mapState('ethograms', {
-      behaviors (store) {
-        return getBehaviorNamesForLocation(store, 123)
-      }
-    })
-  },
-
-  methods: {
-    onAlertMe (e) {
-      alert('hi')
+    behaviors () {
+      const locationId = getLocationIdForObservationId(this.$store.state.observations, this.observationId)
+      return getBehaviorNamesForLocation(this.$store.state.ethograms, locationId)
     }
+  },
+  methods: {
+    ...mapActions('observations', [
+      'assignAction'
+    ])
   }
 }
 </script>
