@@ -1,8 +1,8 @@
 import router from '../router'
 
 // URL and endpoint constants
-export const API_URL = process.env.NODE_ENV === 'production' ? 'https://save-the-animals.herokuapp.com/' : 'http://localhost:3000/'
-const LOGIN_URL = API_URL + 'api/auth'
+export const API_URL = process.env.NODE_ENV === 'production' ? 'https://save-the-animals.herokuapp.com' : 'http://localhost:3000'
+const LOGIN_URL = API_URL + '/api/auth'
 
 export default {
 
