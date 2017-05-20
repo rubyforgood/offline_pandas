@@ -26,7 +26,6 @@ export default {
       }
     })
   },
-
   methods: {
     onAlertMe (e) {
       alert('hi')
