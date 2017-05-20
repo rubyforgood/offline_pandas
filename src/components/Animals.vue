@@ -22,8 +22,7 @@ export default Vue.component('child', {
   props: ['observationId'],
   computed: {
     subjects () {
-      const observationId = this.$router.currentRoute.params.id
-      const observation = this.$store.state.observations.data[observationId]
+      const observation = this.$store.state.observations.data[this.observationId]
       const locationId = parseInt(observation.locationId)
       return getSubjectsForLocation(this.$store.state.ethograms, locationId)
     }

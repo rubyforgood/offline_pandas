@@ -1,7 +1,7 @@
 <template>
   <div v-if="data">
-    <Animals observation-id="123"></Animals>
-    <Behaviors></Behaviors>
+    <Animals :observation-id="observationId"></Animals>
+    <Behaviors :observation-id="observationId"></Behaviors>
     <Modifiers></Modifiers>
   </div>
 </template>
@@ -22,7 +22,10 @@ export default {
   computed: {
     ...mapState('ethograms', {
       data: 'data'
-    })
+    }),
+    observationId () {
+      return this.$router.currentRoute.params.id
+    }
   }
 }
 </script>
