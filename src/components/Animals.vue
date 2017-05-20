@@ -1,7 +1,7 @@
 <template>
   <div class="bg-washed-blue">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
-      <div class="flex-auto pa1 tc">Subjects</div>
+      <div class="flex-auto pa1 tc">Subjects for {{ observationId }}</div>
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
       <div v-for="subject in subjects">
@@ -14,11 +14,13 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapState } from 'vuex'
 import { getSubjectsForLocation } from '@/utils/getEthogramData'
 
-export default {
+export default Vue.component('child', {
   name: 'locations',
+  props: ['observationId'],
   computed: {
     ...mapState('ethograms', {
       subjects (store) {
@@ -32,5 +34,5 @@ export default {
       alert('hi')
     }
   }
-}
+})
 </script>

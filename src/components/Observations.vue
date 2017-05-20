@@ -1,6 +1,6 @@
 <template>
   <div v-if="data">
-    <Animals></Animals>
+    <Animals observation-id="lol"></Animals>
     <Behaviors></Behaviors>
     <Modifiers></Modifiers>
   </div>
