@@ -14,17 +14,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { getBehaviorNamesForLocation } from '@/utils/getEthogramData'
 
 export default {
   name: 'locations',
+  props: ['observationId'],
   computed: {
-    ...mapState('ethograms', {
-      behaviors (store) {
-        return getBehaviorNamesForLocation(store, 123)
-      }
-    })
+    behaviors () {
+      const observation = this.$store.state.observations.data[this.observationId]
+      const locationId = parseInt(observation.locationId)
+      return getBehaviorNamesForLocation(this.$store.state.ethograms, locationId)
+    }
   },
   methods: {
     onAlertMe (e) {
