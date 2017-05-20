@@ -5,18 +5,18 @@ export default {
   namespaced: true,
   state: {
     data: {
-      123: {
-        id: 123,
-        locationId: 123
+      '123': {
+        id: '123',
+        locationId: '123'
       },
-      456: {
-        id: 123,
-        locationId: 123,
+      '456': {
+        id: '123',
+        locationId: '123',
         subject: 'Pamela'
       },
-      789: {
-        id: 123,
-        locationId: 123,
+      '789': {
+        id: '123',
+        locationId: '123',
         subject: 'Pamela',
         actionName: 'walking',
         modifierName: 'quickly'
@@ -27,20 +27,26 @@ export default {
     setObservation (state, observation) {
       Vue.set(state.data, observation.id, observation)
     },
-    setSubject (state, {observationId, subject}) {
-      Vue.set(state.data[observationId], 'subject', subject)
+    setSubject (state, { observationId, subject }) {
+      const observation = { ...state.data[observationId], subject }
+      Vue.set(state.data, observation.id, observation)
     },
-    setAction (state, {observationId, actionName}) {
-      Vue.set(state.data[observationId], 'actionName', actionName)
+    setAction (state, { observationId, actionName }) {
+      const observation = { ...state.data[observationId], actionName }
+      Vue.set(state.data, observation.id, observation)
     },
-    setModifier (state, {observationId, modifierName}) {
-      Vue.set(state.data[observationId], 'modifierName', modifierName)
+    setModifier (state, { observationId, modifierName }) {
+      const observation = { ...state.data[observationId], modifierName }
+      Vue.set(state.data, observation.id, observation)
     }
   },
   actions: {
     createObservation ({ commit }, locationId) {
       const newId = v4()
-      const newObservation = { id: newId, locationId }
+      const newObservation = {
+        id: newId,
+        locationId
+      }
       commit('setObservation', newObservation)
       return newObservation
     },
