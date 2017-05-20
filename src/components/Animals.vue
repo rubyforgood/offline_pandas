@@ -16,14 +16,14 @@
 <script>
 import Vue from 'vue'
 import { getSubjectsForLocation } from '@/utils/getEthogramData'
+import { getLocationIdForObservationId } from '@/utils/getObservationData'
 
 export default Vue.component('child', {
   name: 'locations',
   props: ['observationId'],
   computed: {
     subjects () {
-      const observation = this.$store.state.observations.data[this.observationId]
-      const locationId = parseInt(observation.locationId)
+      const locationId = getLocationIdForObservationId(this.$store.state.observations, this.observationId)
       return getSubjectsForLocation(this.$store.state.ethograms, locationId)
     }
   },

@@ -15,14 +15,14 @@
 
 <script>
 import { getBehaviorNamesForLocation } from '@/utils/getEthogramData'
+import { getLocationIdForObservationId } from '@/utils/getObservationData'
 
 export default {
   name: 'locations',
   props: ['observationId'],
   computed: {
     behaviors () {
-      const observation = this.$store.state.observations.data[this.observationId]
-      const locationId = parseInt(observation.locationId)
+      const locationId = getLocationIdForObservationId(this.$store.state.observations, this.observationId)
       return getBehaviorNamesForLocation(this.$store.state.ethograms, locationId)
     }
   },
