@@ -1,5 +1,6 @@
 import Clock from '@/utils/Clock'
 import FakeNetworkStatus from '@/utils/FakeNetworkStatus'
+import runSync from '@/sync/runSync'
 
 export default class ServerSyncRunner {
   constructor ({ clock, networkStatus } = defaultServerSyncDependencies()) {
@@ -19,8 +20,8 @@ export default class ServerSyncRunner {
   start () {
     this.clock.repeat({
       key: 'serverSync',
-      method: () => { console.log('running sync') },
-      interval: 1000
+      method: runSync,
+      interval: 5000
     })
   }
 

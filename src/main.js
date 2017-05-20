@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import configureStore from './store'
 import ServerSyncRunner from './sync'
+import {
+  locallyStoredObservations,
+  putTestDataInStorage,
+  clearLocallyStoredObservations
+} from './utils/observationPersistence'
 
 Vue.config.productionTip = false
 
@@ -22,3 +27,7 @@ window.mainVM = new Vue({
   components: { App },
   store
 })
+
+window.locallyStoredObservations = locallyStoredObservations
+window.putTestDataInStorage = putTestDataInStorage
+window.clearLocallyStoredObservations = clearLocallyStoredObservations
