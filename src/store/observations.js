@@ -26,8 +26,8 @@ export default {
     setObservation (state, observation) {
       Vue.set(state.data, observation.id, observation)
     },
-    setSubject (state, {observation, subject}) {
-      Vue.set(state.data[observation.id], 'subject', subject)
+    setSubject (state, {observationId, subject}) {
+      Vue.set(state.data[observationId], 'subject', subject)
     }
   },
   actions: {
@@ -38,8 +38,7 @@ export default {
       return newObservation
     },
     assignSubject ({ state, commit }, { observationId, subjectName }) {
-      const observation = state.data[observationId]
-      commit('setSubject', { observation, subject: subjectName })
+      commit('setSubject', { observationId, subject: subjectName })
     }
   }
 }
