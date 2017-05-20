@@ -1,9 +1,7 @@
-import Clock from '@/utils/Clock'
-import FakeNetworkStatus from '@/utils/FakeNetworkStatus'
 import runSync from '@/sync/runSync'
 
 export default class ServerSyncRunner {
-  constructor ({ clock, networkStatus } = defaultServerSyncDependencies()) {
+  constructor ({ clock, networkStatus }) {
     this.clock = clock
     this.networkStatus = networkStatus
   }
@@ -27,12 +25,5 @@ export default class ServerSyncRunner {
 
   stop () {
     this.clock.stop({ key: 'serverSync' })
-  }
-}
-
-function defaultServerSyncDependencies () {
-  return {
-    clock: new Clock(),
-    networkStatus: new FakeNetworkStatus()
   }
 }

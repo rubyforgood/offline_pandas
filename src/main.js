@@ -10,13 +10,17 @@ import {
   putTestDataInStorage,
   clearLocallyStoredObservations
 } from './utils/observationPersistence'
+import FakeNetworkStatus from './utils/FakeNetworkStatus'
+import Clock from './utils/Clock'
 
 Vue.config.productionTip = false
 
 const store = configureStore()
 store.dispatch('ethograms/fetchAll')
 
-const serverSync = new ServerSyncRunner()
+const clock = new Clock()
+const networkStatus = new FakeNetworkStatus()
+const serverSync = new ServerSyncRunner({ clock, networkStatus })
 serverSync.run()
 
 /* eslint-disable no-new */
@@ -31,3 +35,4 @@ window.mainVM = new Vue({
 window.locallyStoredObservations = locallyStoredObservations
 window.putTestDataInStorage = putTestDataInStorage
 window.clearLocallyStoredObservations = clearLocallyStoredObservations
+window.networkStatus = networkStatus
