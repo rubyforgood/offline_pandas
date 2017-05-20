@@ -9,11 +9,17 @@
     <div v-if="onModifierStep">
       <Modifiers :observation-id="observationId"></Modifiers>
     </div>
+    <div v-if="onSubmitStep">
+      <h1>Ship it</h1>
+      <a @click="conclude({ observationId })" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
+        Start Over
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Animals from './Animals.vue'
 import Behaviors from './Behaviors.vue'
 import Modifiers from './Modifiers.vue'
@@ -41,6 +47,9 @@ export default {
     onModifierStep () {
       return Boolean(this.behaviorIsSelected && !this.modifierIsSelected)
     },
+    onSubmitStep () {
+      return Boolean(this.modifierIsSelected)
+    },
     animalIsSelected () {
       return Boolean(this.$store.state.observations.data[this.observationId].subject)
     },
@@ -50,6 +59,12 @@ export default {
     modifierIsSelected () {
       return Boolean(this.$store.state.observations.data[this.observationId].modifierName)
     }
+  },
+
+  methods: {
+    ...mapActions('observations', [
+      'conclude'
+    ])
   }
 }
 </script>

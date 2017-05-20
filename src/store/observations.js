@@ -33,7 +33,8 @@ export default {
       const newId = v4()
       const newObservation = {
         id: newId,
-        locationId
+        locationId,
+        concluded: false
       }
       commit('storeObservation', newObservation)
       return newObservation
@@ -51,6 +52,10 @@ export default {
     },
     assignModifier ({ state, commit }, { observationId, modifierName }) {
       const observation = { ...state.data[observationId], modifierName }
+      commit('storeObservation', observation)
+    },
+    conclude ({ state, commit }, { observationId }) {
+      const observation = { ...state.data[observationId], concluded: true }
       commit('storeObservation', observation)
     }
   }
