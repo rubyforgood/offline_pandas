@@ -23,7 +23,7 @@ export default {
     ]),
     restart (observationId) {
       return this.conclude(observationId).then(() => {
-        this.$router.push(`/locations`)
+        this.$router.push(`/`)
       })
     }
   }
