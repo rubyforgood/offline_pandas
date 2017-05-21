@@ -5,7 +5,9 @@ export const observationObserver = store => {
     if (type !== 'observations/storeObservation') {
       return
     }
-    const localStorageFormattedObservations = Object.values(state.observations.data).map((observation) => {
+    const localStorageFormattedObservations = Object.values(
+      state.observations.data
+    ).map(observation => {
       return {
         id: observation.id,
         observation_session_id: observation.locationId,
@@ -18,16 +20,18 @@ export const observationObserver = store => {
     markObservationsPersisted(localStorageFormattedObservations)
   })
 
-  const vuexFormattedObservations = unwrapperStoredObservations().map((observation) => {
-    return {
-      id: observation.id,
-      locationId: observation.observation_session_id,
-      subject: observation.subject,
-      modifierName: observation.modifier,
-      actionName: observation.behavior,
-      concluded: observation.timestamp
+  const vuexFormattedObservations = unwrapperStoredObservations().map(
+    observation => {
+      return {
+        id: observation.id,
+        locationId: observation.observation_session_id,
+        subject: observation.subject,
+        modifierName: observation.modifier,
+        actionName: observation.behavior,
+        concluded: observation.timestamp
+      }
     }
-  })
+  )
   store.commit('observations/rehydrate', {
     data: vuexFormattedObservations
   })
@@ -43,7 +47,10 @@ export function unwrapperStoredObservations () {
 
 export function unpersistedObservations () {
   const observations = Object.values(locallyStoredObservations())
-  const unpersisted = observations.filter(o => !o.persistedAt)
+  const concludedObservations = observations.filter(
+    o => o.observation.timestamp
+  )
+  const unpersisted = concludedObservations.filter(o => !o.persistedAt)
   const unwrapped = unpersisted.map(o => o.observation)
 
   return unwrapped
@@ -55,7 +62,13 @@ export function markObservationsPersisted (
 ) {
   const allWrappedObservations = locallyStoredObservations()
   unwrappedObservations.forEach(observation => {
-    allWrappedObservations[observation.id] = { persistedAt, observation }
+    // TODO Should we make the store just be aware of persisted at?
+    if (
+      !allWrappedObservations[observation.id] ||
+      !allWrappedObservations[observation.id].persistedAt
+    ) {
+      allWrappedObservations[observation.id] = { persistedAt, observation }
+    }
   })
   storeWrappedObservations(allWrappedObservations)
 }
