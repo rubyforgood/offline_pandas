@@ -57,9 +57,7 @@ router.beforeEach((to, from, next) => {
   auth.checkAuth()
   const isAuthenticated = auth.user.authenticated
 
-  if ((to.name === 'Login') && isAuthenticated) {
-    next('/')
-  } else if ((to.name === 'Login') || isAuthenticated) {
+  if ((to.name === 'Login') || isAuthenticated) {
     next()
   } else {
     next('/login')

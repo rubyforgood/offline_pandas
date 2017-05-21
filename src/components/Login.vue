@@ -21,6 +21,16 @@ import auth from '../auth'
 
 export default {
   name: 'login',
+  beforeRouteEnter (to, from, next) {
+    auth.checkAuth()
+    const isAuthenticated = auth.user.authenticated
+
+    if (isAuthenticated) {
+      next('/') // go to Locations route
+    } else {
+      next() // continue
+    }
+  },
   computed: {
     ...mapState('login', {
       credentials: 'credentials',
