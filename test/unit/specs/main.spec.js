@@ -2,8 +2,13 @@ import Vue from 'vue'
 import router from '@/router'
 import auth from '@/auth'
 import configureStore from '@/store'
+import FakeNetworkStatus from '@/utils/FakeNetworkStatus'
+import NetworkStatusPlugin from '@/utils/NetworkStatusPlugin'
 
 const subject = () => {
+  const networkStatus = new FakeNetworkStatus()
+  Vue.use(NetworkStatusPlugin, { networkStatus })
+
   return new Vue({
     router: router,
     render: h => h('router-view'),
