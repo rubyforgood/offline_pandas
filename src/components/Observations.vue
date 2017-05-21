@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import Animals from './Animals.vue'
 import Behaviors from './Behaviors.vue'
 import Modifiers from './Modifiers.vue'
@@ -58,12 +58,6 @@ export default {
     modifierIsSelected () {
       return Boolean(this.$store.state.observations.data[this.observationId].modifierName)
     }
-  },
-
-  methods: {
-    ...mapActions('observations', [
-      'conclude'
-    ])
   }
 }
 </script>
