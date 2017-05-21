@@ -15,7 +15,7 @@
       <a @click='fetchEthograms' class='link f6 pa1 mv5 b--gray br3 shadow-3 bg-white'>
         refresh
       </a>
-      <a @click='logout' class='absolute bottom-0 right-0 link f6 pa1 mv5 b--gray br3 shadow-3 bg-white'>
+      <a @click='logout' class='absolute bottom-0 right-0 link f6 pa1 ma3 b--gray br3 shadow-3 bg-white'>
         logout
       </a>
     </div>
