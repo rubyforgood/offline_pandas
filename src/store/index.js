@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import login from '@/store/login'
 import ethograms from '@/store/ethograms'
 import observations from '@/store/observations'
+import ethogramRehydrator from '@/utils/ethogramRehydrator'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default function configureStore () {
       login,
       ethograms,
       observations
-    }
+    },
+    plugins: [ethogramRehydrator()]
   })
 }
