@@ -1,7 +1,7 @@
 <template>
   <div class="animals">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
-      <div class="flex-auto pa1 tc">Subjects for {{ observationId }}</div>
+      <div class="flex-auto pa1 tc">Subjects</div>
     </div>
     <div class="f5 flex flex-row flex-wrap items-center justify-around pa2">
       <div v-for="subjectName in subjects">
