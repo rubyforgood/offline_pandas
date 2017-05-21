@@ -6,26 +6,23 @@ import Animals from '@/components/Animals'
 import Behaviors from '@/components/Behaviors'
 import Modifiers from '@/components/Modifiers'
 import Observations from '@/components/Observations'
+import auth from '../auth'
 
 import ObservationSessionsStart from '@/components/ObservationSessions/Start'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home'
+      name: 'Locations',
+      component: Locations
     },
     {
       path: '/login',
       name: 'Login',
       component: Login
-    },
-    {
-      path: '/locations',
-      name: 'Locations',
-      component: Locations
     },
     {
       path: '/animals',
@@ -55,3 +52,18 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  auth.checkAuth()
+  const isAuthenticated = auth.user.authenticated
+
+  if ((to.name === 'Login') && isAuthenticated) {
+    next('/')
+  } else if ((to.name === 'Login') || isAuthenticated) {
+    next()
+  } else {
+    next('/login')
+  }
+})
+
+export default router

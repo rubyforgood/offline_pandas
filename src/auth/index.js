@@ -29,8 +29,8 @@ export default {
 
       this.user.authenticated = true
 
-      // Redirect to home
-      router.push({ name: 'Home' })
+      // Redirect to root
+      router.push({ name: 'Locations' })
     }).catch((err) => {
       context.error = err
     })
