@@ -20,9 +20,6 @@ export default {
   },
   methods: {
     ...mapActions('ethograms', ['fetchAll'])
-  },
-  beforeMount () {
-    this.fetchAll()
   }
 }
 </script>

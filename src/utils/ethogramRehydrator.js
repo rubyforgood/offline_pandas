@@ -1,6 +1,6 @@
 export default function ethogramRehydrator () {
   return function (store) {
-    store.commit('ethograms/rehydrateData', locallyStoredEthograms())
+    store.commit('ethograms/rehydrateData', { data: locallyStoredEthograms() })
     store.subscribe((mutation, state) => {
       if (mutation.type.split('/')[0] === 'ethograms') {
         storeEthograms(state.ethograms.data)
@@ -9,8 +9,10 @@ export default function ethogramRehydrator () {
   }
 }
 
-function locallyStoredEthograms() {
-  return JSON.parse(window.localStorage.get('ethograms'))
+function locallyStoredEthograms () {
+  return JSON.parse(window.localStorage.getItem('ethograms')) || {}
 }
 
-function storeEthograms()
+function storeEthograms (ethograms) {
+  window.localStorage.setItem('ethograms', JSON.stringify(ethograms))
+}

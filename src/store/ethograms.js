@@ -1,9 +1,10 @@
+import Vue from 'vue'
 import { keyBy } from 'lodash'
 
 export default {
   namespaced: true,
   state: {
-    data: null,
+    data: {},
     loading: false,
     error: null
   },
@@ -13,8 +14,10 @@ export default {
       state.data = keyBy(data, 'id')
     },
     rehydrateData (state, { data }) {
-      state.data = data
-    }
+      Object.values(data).forEach((ethogram) => {
+        Vue.set(state.data, ethogram.id, ethogram)
+      })
+    },
     setLoading (state) {
       state.loading = true
     },
