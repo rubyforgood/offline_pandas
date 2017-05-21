@@ -16,8 +16,12 @@ export default function runSync () {
   const now = new Date().toString()
 
   postObservations(observations, now)
-    .then(() => {
-      markObservationsPersisted(observations, now)
+    .then(data => {
+      const persistedIDs = data.filter(o => o.persisted).map(o => o.id)
+      const persistedObservations = observations.filter(o =>
+        persistedIDs.includes(o.id)
+      )
+      markObservationsPersisted(persistedObservations, now)
     })
     .catch(() => {
       console.log('failed to post observations')
@@ -41,7 +45,10 @@ function postObservations (observations, sentAt) {
       })
     )
       .then(response => response.json())
-      .then(data => console.log('data', data))
-      .catch(error => console.error('error', error))
+      .then(data => resolve(data))
+      .catch(error => {
+        console.error('error', error)
+        reject(error)
+      })
   })
 }
