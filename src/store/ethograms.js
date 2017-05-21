@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { keyBy } from 'lodash'
-// import AuthenticatedRequest from '../utils/AuthenticatedRequest'
+import AuthenticatedRequest from '../utils/AuthenticatedRequest'
 
 export default {
   namespaced: true,
@@ -30,10 +30,9 @@ export default {
   actions: {
     fetchAll ({ commit }) {
       commit('setLoading')
-      // fetch(new AuthenticatedRequest('/api/ethograms'))
-      fetch('/static/fixtures.json')
+      fetch(new AuthenticatedRequest('/api/ethograms'))
         .then(response => response.json())
-        .then(response => commit('setData', { data: response.data }))
+        .then(response => commit('setData', { data: [] }))
         .catch(error => commit('setError', { error }))
     }
   }
