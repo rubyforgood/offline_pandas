@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-washed-blue">
+  <div class="conclusion">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
       <div class="flex-auto pa1 tc">Review</div>
     </div>
