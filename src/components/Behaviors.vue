@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-washed-blue">
+  <div class="behaviors">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
       <div class="flex-auto pa1 tc">Behaviors</div>
     </div>
@@ -19,7 +19,7 @@ import { getBehaviorNamesForLocation } from '@/utils/getEthogramData'
 import { getLocationIdForObservationId } from '@/utils/getObservationData'
 
 export default {
-  name: 'locations',
+  name: 'behaviors',
   props: ['observationId'],
   computed: {
     behaviors () {

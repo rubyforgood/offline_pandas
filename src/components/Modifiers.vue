@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-washed-blue">
+  <div class="modifiers">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
       <div class="flex-auto pa1 tc">Modifiers</div>
     </div>
@@ -19,7 +19,7 @@ import { getLocationIdForObservationId, getActionNameForObservationId } from '@/
 import { getModifiersFor } from '@/utils/getEthogramData'
 
 export default {
-  name: 'locations',
+  name: 'modifiers',
   props: ['observationId'],
   computed: {
     modifiers () {

@@ -19,7 +19,7 @@ import Behaviors from './Behaviors.vue'
 import Modifiers from './Modifiers.vue'
 
 export default {
-  name: 'locations',
+  name: 'observations',
   components: {
     Animals,
     Behaviors,
