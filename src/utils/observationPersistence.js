@@ -10,7 +10,8 @@ export const observationObserver = store => {
     ).map(observation => {
       return {
         id: observation.id,
-        observation_session_id: observation.locationId,
+        observation_session_id: observation.observationSessionId,
+        ethogram_id: observation.locationId,
         subject: observation.subject,
         modifier: observation.modifierName,
         behavior: observation.actionName,
@@ -24,7 +25,8 @@ export const observationObserver = store => {
     observation => {
       return {
         id: observation.id,
-        locationId: observation.observation_session_id,
+        observationSessionId: observation.observation_session_id,
+        locationId: observation.ethogram_id,
         subject: observation.subject,
         modifierName: observation.modifier,
         actionName: observation.behavior,

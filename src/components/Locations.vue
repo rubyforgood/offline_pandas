@@ -53,16 +53,19 @@ export default {
   },
   methods: {
     ...mapActions('observations', [
-      'createObservation'
+      'createObservation',
+      'createObservationSession'
     ]),
     ...mapActions('ethograms', {
       fetchEthograms: 'fetchAll'
     }),
     chooseLocation (locationId) {
-      return this.createObservation(locationId).then((newObservation) => {
-        const newObservationId = newObservation.id
-        this.$router.push(`observations/${newObservationId}`)
-      })
+      return this.createObservationSession({ locationId })
+              .then(this.createObservation.bind(this))
+              .then((newObservation) => {
+                const newObservationId = newObservation.id
+                this.$router.push(`observations/${newObservationId}`)
+              })
     }
   },
   beforeMount () {

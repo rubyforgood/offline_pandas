@@ -4,9 +4,15 @@ import Vue from 'vue'
 export default {
   namespaced: true,
   state: {
-    data: {}
+    data: {},
+    currentObservationSessionId: null,
+    currentLocationId: null
   },
   mutations: {
+    setObservationSession (state, { observationSessionId, locationId }) {
+      state.currentObservationSessionId = observationSessionId
+      state.currentLocationId = locationId
+    },
     storeObservation (state, observation) {
       Vue.set(state.data, observation.id, observation)
     },
@@ -17,12 +23,21 @@ export default {
     }
   },
   actions: {
-    createObservation ({ commit }, locationId) {
+    createObservationSession ({ commit }, { locationId }) {
+      const observationSessionId = v4()
+      commit('setObservationSession', { observationSessionId, locationId })
+    },
+    createObservation ({ commit, state }) {
+      if (!state.currentObservationSessionId || !state.currentLocationId) {
+        throw new Error('observations cannot be made without an active observation session')
+      }
+
       const newId = v4()
       const newObservation = {
         id: newId,
-        locationId,
-        concluded: null
+        concluded: null,
+        locationId: state.currentLocationId,
+        observationSessionId: state.currentObservationSessionId
       }
       commit('storeObservation', newObservation)
       return newObservation
