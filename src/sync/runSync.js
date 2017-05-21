@@ -1,4 +1,9 @@
-import { unpersistedObservations, markObservationsPersisted } from '@/utils/observationPersistence'
+import {
+  unpersistedObservations,
+  markObservationsPersisted
+} from '@/utils/observationPersistence'
+
+import AuthenticatedRequest from '@/utils/AuthenticatedRequest'
 
 export default function runSync () {
   console.log('running sync')
@@ -8,11 +13,15 @@ export default function runSync () {
     return
   }
 
-  const now = (new Date()).toString()
+  const now = new Date().toString()
 
   postObservations(observations, now)
-    .then(() => { markObservationsPersisted(observations, now) })
-    .catch(() => { console.log('failed to post observations') })
+    .then(() => {
+      markObservationsPersisted(observations, now)
+    })
+    .catch(() => {
+      console.log('failed to post observations')
+    })
 }
 
 function postObservations (observations, sentAt) {
@@ -23,7 +32,16 @@ function postObservations (observations, sentAt) {
       sent_at: sentAt,
       observations
     }
-    console.log(dataToPost)
-    return resolve()
+    console.log('data to post', dataToPost)
+
+    return fetch(
+      new AuthenticatedRequest('/api/observation_sessions', {
+        method: 'POST',
+        body: JSON.stringify(dataToPost)
+      })
+    )
+      .then(response => response.json())
+      .then(data => console.log('data', data))
+      .catch(error => console.error('error', error))
   })
 }

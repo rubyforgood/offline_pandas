@@ -5,11 +5,31 @@ export const observationObserver = store => {
     if (type !== 'observations/storeObservation') {
       return
     }
-    markObservationsPersisted(Object.values(state.observations.data))
+    const localStorageFormattedObservations = Object.values(state.observations.data).map((observation) => {
+      return {
+        id: observation.id,
+        observation_session_id: observation.locationId,
+        subject: observation.subject,
+        modifier: observation.modifierName,
+        behavior: observation.actionName,
+        timestamp: observation.concluded
+      }
+    })
+    markObservationsPersisted(localStorageFormattedObservations)
   })
 
+  const vuexFormattedObservations = unwrapperStoredObservations().map((observation) => {
+    return {
+      id: observation.id,
+      locationId: observation.observation_session_id,
+      subject: observation.subject,
+      modifierName: observation.modifier,
+      actionName: observation.behavior,
+      concluded: observation.timestamp
+    }
+  })
   store.commit('observations/rehydrate', {
-    data: unwrapperStoredObservations()
+    data: vuexFormattedObservations
   })
 }
 
