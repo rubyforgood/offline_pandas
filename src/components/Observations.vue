@@ -1,18 +1,28 @@
 <template>
-  <div v-if="data">
-    <div v-if="onAnimalStep">
-      <Animals :observation-id="observationId"></Animals>
+  <transition name="slide-fade">
+    <div v-if="data">
+      <transition name="slide-fade">
+        <div v-if="onAnimalStep" class="absolute w-100 tc">
+          <Animals :observation-id="observationId"></Animals>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div v-if="onBehaviorStep" class="absolute w-100 tc">
+          <Behaviors :observation-id="observationId"></Behaviors>
+        </div>
+      </transition>
+      <transition name="slide-fade" class="absolute w-100 tc">
+        <div v-if="onModifierStep">
+          <Modifiers :observation-id="observationId"></Modifiers>
+        </div>
+      </transition>
+      <transition name="slide-fade" class="absolute w-100 tc">
+        <div v-if="onSubmitStep">
+          <Conclusion :observation-id="observationId"></Conclusion>
+        </div>
+      </transition>
     </div>
-    <div v-if="onBehaviorStep">
-      <Behaviors :observation-id="observationId"></Behaviors>
-    </div>
-    <div v-if="onModifierStep">
-      <Modifiers :observation-id="observationId"></Modifiers>
-    </div>
-    <div v-if="onSubmitStep">
-      <Conclusion :observation-id="observationId"></Conclusion>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -77,3 +87,22 @@ export default {
   }
 }
 </script>
+
+<style>
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+/*.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}*/
+.slide-fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.slide-fade-leave {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+</style>

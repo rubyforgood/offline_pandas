@@ -1,20 +1,22 @@
 <template>
-  <div class="locations">
-    <div class="pa4 flex flex-row flex-wrap items-center justify-start">
-      <div class="flex-auto pa1 tc">Locations</div>
-    </div>
-    <div v-if='message'>{{ message }}</div>
-    <div class='f5 flex flex-row flex-wrap items-center justify-around pa2'>
-      <div v-for='location in locations'>
-        <a @click='chooseLocation(location.id)' class='flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white'>
-          {{ location.name }}
-        </a>
+  <transition name="slide-slideup">
+    <div class="locations">
+      <div class="pa4 flex flex-row flex-wrap items-center justify-start">
+        <div class="flex-auto pa1 tc">Locations</div>
       </div>
+      <div v-if='message'>{{ message }}</div>
+      <div class='f5 flex flex-row flex-wrap items-center justify-around pa2'>
+        <div v-for='location in locations'>
+          <a @click='chooseLocation(location.id)' class='flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white'>
+            {{ location.name }}
+          </a>
+        </div>
+      </div>
+      <a @click='fetchEthograms' class='link f6 pa1 mv5 b--gray br3 shadow-3 bg-white'>
+        refresh
+      </a>
     </div>
-    <a @click='fetchEthograms' class='link f6 pa1 mv5 b--gray br3 shadow-3 bg-white'>
-      refresh
-    </a>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -68,3 +70,19 @@ export default {
   }
 }
 </script>
+
+<style>
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-slideup-enter-active {
+  transition: all .3s ease;
+}
+.slide-slideup-enter {
+  transform: translateY(10px);
+  opacity: 0;
+}
+.slide-slideup-leave {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+</style>
