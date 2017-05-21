@@ -37,6 +37,22 @@ export default {
     observationId () {
       return this.$router.currentRoute.params.id
     },
+    observation () {
+      return this.$store.state.observations.data[this.observationId]
+    },
+    ethogram () {
+      return this.data[this.observation.locationId]
+    },
+    currentBehavior () {
+      return this.ethogram.behaviors.find(b => b.name === this.observation.actionName)
+    },
+    hasModifiers () {
+      if (this.currentBehavior) {
+        return this.currentBehavior.modifiers.length > 0
+      } else {
+        return null
+      }
+    },
     onAnimalStep () {
       return Boolean(!this.animalIsSelected)
     },
@@ -44,19 +60,19 @@ export default {
       return Boolean(this.animalIsSelected && !this.behaviorIsSelected)
     },
     onModifierStep () {
-      return Boolean(this.behaviorIsSelected && !this.modifierIsSelected)
+      return Boolean((this.hasModifiers && this.behaviorIsSelected) && !this.modifierIsSelected)
     },
     onSubmitStep () {
-      return Boolean(this.modifierIsSelected)
+      return Boolean((!this.hasModifiers && this.behaviorIsSelected) || this.modifierIsSelected)
     },
     animalIsSelected () {
-      return Boolean(this.$store.state.observations.data[this.observationId].subject)
+      return Boolean(this.observation.subject)
     },
     behaviorIsSelected () {
-      return Boolean(this.$store.state.observations.data[this.observationId].actionName)
+      return Boolean(this.observation.actionName)
     },
     modifierIsSelected () {
-      return Boolean(this.$store.state.observations.data[this.observationId].modifierName)
+      return Boolean(this.observation.modifierName)
     }
   }
 }
