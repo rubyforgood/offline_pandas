@@ -4,54 +4,50 @@ import Vue from 'vue'
 export default {
   namespaced: true,
   state: {
-    data: {
-      123: {
-        id: 123,
-        locationId: 123
-      },
-      456: {
-        id: 123,
-        locationId: 123,
-        subject: 'Pamela'
-      },
-      789: {
-        id: 123,
-        locationId: 123,
-        subject: 'Pamela',
-        actionName: 'walking',
-        modifierName: 'quickly'
-      }
-    }
+    data: {}
   },
   mutations: {
-    setObservation (state, observation) {
+    storeObservation (state, observation) {
       Vue.set(state.data, observation.id, observation)
     },
-    setSubject (state, {observationId, subject}) {
-      Vue.set(state.data[observationId], 'subject', subject)
-    },
-    setAction (state, {observationId, actionName}) {
-      Vue.set(state.data[observationId], 'actionName', actionName)
-    },
-    setModifier (state, {observationId, modifierName}) {
-      Vue.set(state.data[observationId], 'modifierName', modifierName)
+    rehydrate (state, { data }) {
+      data.forEach(function (observation) {
+        Vue.set(state.data, observation.id, observation)
+      }, this)
     }
   },
   actions: {
     createObservation ({ commit }, locationId) {
       const newId = v4()
-      const newObservation = { id: newId, locationId }
-      commit('setObservation', newObservation)
+      const newObservation = {
+        id: newId,
+        locationId,
+        concluded: null
+      }
+      commit('storeObservation', newObservation)
       return newObservation
     },
     assignSubject ({ state, commit }, { observationId, subjectName }) {
-      commit('setSubject', { observationId, subject: subjectName })
+      const observation = {
+        ...state.data[observationId],
+        subject: subjectName
+      }
+      commit('storeObservation', observation)
     },
     assignAction ({ state, commit }, { observationId, actionName }) {
-      commit('setAction', { observationId, actionName })
+      const observation = { ...state.data[observationId], actionName }
+      commit('storeObservation', observation)
     },
     assignModifier ({ state, commit }, { observationId, modifierName }) {
-      commit('setModifier', { observationId, modifierName })
+      const observation = { ...state.data[observationId], modifierName }
+      commit('storeObservation', observation)
+    },
+    conclude ({ state, commit }, { observationId }) {
+      const observation = {
+        ...state.data[observationId],
+        concluded: new Date()
+      }
+      commit('storeObservation', observation)
     }
   }
 }

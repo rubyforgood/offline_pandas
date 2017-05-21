@@ -1,9 +1,10 @@
 {
   "data": [
     {
-      "id": 123,
+      "id": "3b37486d-3a96-414a-a000-b644ce649b55",
       "name": "Cat Observations 2017",
       "subjects": ["Miles", "Lulu", "Momo", "Minerva"],
+      "structure_id": "fb37986d-3a96-414a-a000-b644ce649b52",
       "behaviors": [
         {"name": "walking", "modifiers": ["quickly", "slowly"], "hasTarget": false},
         {"name": "fighting", "modifiers": [], "hasTarget": true}

@@ -2,7 +2,7 @@
 
 ## Input
 
-**GET /ethograms**
+**GET /api/ethograms**
 
 {
   "data": [
@@ -20,22 +20,24 @@
 
 ## Output
 
-**POST /observation_sessions**
+**POST /api/observation_sessions**
 
+Request
+```json
 {
   "sent_at": "2017-05-19T01:15:09.728Z",
   "observations": [
     {
-      "id": "uuid-goes-here",
-      "observation_session_id": "uuid-goes-here",
+      "id": "3b37486d-3a96-414a-a000-b644ce649b53",
+      "observation_session_id": "3b37486d-3a96-414a-a000-b644ce649b52",
       "timestamp": "2017-05-19T01:15:09.728Z",
       "subject": "Minerva",
       "behavior": "walking",
       "modifier": "quickly"
     },
     {
-      "id": "other-uuid-goes-here",
-      "observation_session_id": "uuid-goes-here",
+      "id": "3b37486d-3a96-414a-a000-b644ce649b55",
+      "observation_session_id": "3b37486d-3a96-414a-a000-b644ce649b55",
       "timestamp": "2017-05-19T01:15:09.728Z",
       "subject": "Minerva",
       "behavior": "fighting",
@@ -43,3 +45,20 @@
     }
   ]
 }
+```
+
+Response
+```json
+[
+  {
+    "id": "3b37486d-3a96-414a-a000-b644ce649b53",
+    "persisted": true,
+    "errors": []
+  },
+  {
+    "id": "3b37486d-3a96-414a-a000-b644ce649b55",
+    "persisted": true,
+    "errors": []
+  }
+]
+```
