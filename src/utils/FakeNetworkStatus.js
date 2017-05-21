@@ -1,6 +1,6 @@
 export default class FakeNetworkStatus {
   constructor () {
-    this.onlineStatus = false
+    this.onlineStatus = true
     this.onOnlineFunctions = []
     this.onOfflineFunctions = []
   }
