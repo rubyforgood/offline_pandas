@@ -36,7 +36,6 @@ function postObservations (observations, sentAt) {
       sent_at: sentAt,
       observations
     }
-    console.log('data to post', dataToPost)
 
     return fetch(
       new AuthenticatedRequest('/api/observation_sessions', {
