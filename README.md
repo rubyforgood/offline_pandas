@@ -25,3 +25,15 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Development
+
+To skip login, run this in the chrome console:
+```
+localStorage.setItem('jwt_token', 'lolol')
+```
+
+To un-do this, you can clear localStorage:
+```
+localStorage.clear()
+```
