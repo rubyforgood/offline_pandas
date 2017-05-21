@@ -60,10 +60,10 @@ export default {
       return Boolean(this.animalIsSelected && !this.behaviorIsSelected)
     },
     onModifierStep () {
-      return Boolean(this.hasModifiers && this.behaviorIsSelected && !this.modifierIsSelected)
+      return Boolean((this.hasModifiers && this.behaviorIsSelected) && !this.modifierIsSelected)
     },
     onSubmitStep () {
-      return Boolean((this.currentBehavior && !this.hasModifiers) || this.modifierIsSelected)
+      return Boolean((!this.hasModifiers && this.behaviorIsSelected) || this.modifierIsSelected)
     },
     animalIsSelected () {
       return Boolean(this.observation.subject)
