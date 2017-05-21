@@ -10,10 +10,7 @@
       <Modifiers :observation-id="observationId"></Modifiers>
     </div>
     <div v-if="onSubmitStep">
-      <h1>Ship it</h1>
-      <a @click="conclude({ observationId })" class="flex link pa3 mh2 mv3 ba b--gray br3 shadow-3 bg-white">
-        Start Over
-      </a>
+      <Conclusion :observation-id="observationId"></Conclusion>
     </div>
   </div>
 </template>
@@ -23,13 +20,15 @@ import { mapState, mapActions } from 'vuex'
 import Animals from './Animals.vue'
 import Behaviors from './Behaviors.vue'
 import Modifiers from './Modifiers.vue'
+import Conclusion from './Conclusion.vue'
 
 export default {
   name: 'observations',
   components: {
     Animals,
     Behaviors,
-    Modifiers
+    Modifiers,
+    Conclusion
   },
   computed: {
     ...mapState('ethograms', {

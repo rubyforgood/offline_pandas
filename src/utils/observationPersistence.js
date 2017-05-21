@@ -1,5 +1,24 @@
+export const observationObserver = store => {
+  // called when the store is initialized
+  store.subscribe((mutation, state) => {
+    const { type } = mutation
+    if (type !== 'observations/storeObservation') {
+      return
+    }
+    markObservationsPersisted(Object.values(state.observations.data))
+  })
+
+  store.commit('observations/rehydrate', {
+    data: unwrapperStoredObservations()
+  })
+}
+
 export function locallyStoredObservations () {
   return JSON.parse(localStorage.getItem('observations')) || {}
+}
+
+export function unwrapperStoredObservations () {
+  return Object.values(locallyStoredObservations()).map(o => o.observation)
 }
 
 export function unpersistedObservations () {
@@ -10,9 +29,12 @@ export function unpersistedObservations () {
   return unwrapped
 }
 
-export function markObservationsPersisted (unwrappedObservations, persistedAt) {
+export function markObservationsPersisted (
+  unwrappedObservations,
+  persistedAt = null
+) {
   const allWrappedObservations = locallyStoredObservations()
-  unwrappedObservations.forEach((observation) => {
+  unwrappedObservations.forEach(observation => {
     allWrappedObservations[observation.id] = { persistedAt, observation }
   })
   storeWrappedObservations(allWrappedObservations)
@@ -20,35 +42,6 @@ export function markObservationsPersisted (unwrappedObservations, persistedAt) {
 
 export function storeWrappedObservations (wrappedObservations) {
   localStorage.setItem('observations', JSON.stringify(wrappedObservations))
-}
-
-export function putTestDataInStorage () {
-  const testData = {
-    'uuid-goes-here': {
-      persistedAt: null,
-      observation: {
-        'id': 'uuid-goes-here',
-        'observation_session_id': 'uuid-goes-here',
-        'timestamp': '2017-05-19T01:15:09.728Z',
-        'subject': 'Minerva',
-        'behavior': 'walking',
-        'modifier': 'quickly'
-      }
-    },
-    'other-uuid-goes-here': {
-      persistedAt: null,
-      observation: {
-        'id': 'other-uuid-goes-here',
-        'observation_session_id': 'uuid-goes-here',
-        'timestamp': '2017-05-19T01:15:09.728Z',
-        'subject': 'Minerva',
-        'behavior': 'fighting',
-        'target': 'Lulu'
-      }
-    }
-  }
-
-  storeWrappedObservations(testData)
 }
 
 export function clearLocallyStoredObservations () {

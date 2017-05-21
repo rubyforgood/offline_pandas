@@ -4,28 +4,16 @@ import Vue from 'vue'
 export default {
   namespaced: true,
   state: {
-    data: {
-      '123': {
-        id: '123',
-        locationId: '123'
-      },
-      '456': {
-        id: '123',
-        locationId: '123',
-        subject: 'Pamela'
-      },
-      '789': {
-        id: '123',
-        locationId: '123',
-        subject: 'Pamela',
-        actionName: 'walking',
-        modifierName: 'quickly'
-      }
-    }
+    data: {}
   },
   mutations: {
     storeObservation (state, observation) {
       Vue.set(state.data, observation.id, observation)
+    },
+    rehydrate (state, { data }) {
+      data.forEach(function (observation) {
+        Vue.set(state.data, observation.id, observation)
+      }, this)
     }
   },
   actions: {
@@ -34,7 +22,7 @@ export default {
       const newObservation = {
         id: newId,
         locationId,
-        concluded: false
+        concluded: null
       }
       commit('storeObservation', newObservation)
       return newObservation
@@ -55,7 +43,10 @@ export default {
       commit('storeObservation', observation)
     },
     conclude ({ state, commit }, { observationId }) {
-      const observation = { ...state.data[observationId], concluded: true }
+      const observation = {
+        ...state.data[observationId],
+        concluded: new Date()
+      }
       commit('storeObservation', observation)
     }
   }

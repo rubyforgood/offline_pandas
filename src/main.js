@@ -7,7 +7,6 @@ import configureStore from './store'
 import ServerSyncRunner from './sync'
 import {
   locallyStoredObservations,
-  putTestDataInStorage,
   clearLocallyStoredObservations
 } from './utils/observationPersistence'
 import FakeNetworkStatus from './utils/FakeNetworkStatus'
@@ -35,6 +34,5 @@ window.mainVM = new Vue({
 })
 
 window.locallyStoredObservations = locallyStoredObservations
-window.putTestDataInStorage = putTestDataInStorage
 window.clearLocallyStoredObservations = clearLocallyStoredObservations
 window.networkStatus = networkStatus
