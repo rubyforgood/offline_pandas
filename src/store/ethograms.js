@@ -2,6 +2,15 @@ import Vue from 'vue'
 import { keyBy } from 'lodash'
 import AuthenticatedRequest from '../utils/AuthenticatedRequest'
 
+// fixturesOrLiveData('live') or fixturesOrLiveData('fixtures')
+function fixturesOrLiveData (fixturesOrLive) {
+  if (fixturesOrLive === 'live') {
+    return new AuthenticatedRequest('/api/ethograms')
+  } else if (fixturesOrLive === 'fixtures') {
+    return '/static/fixtures.json'
+  }
+}
+
 export default {
   namespaced: true,
   state: {
@@ -30,7 +39,7 @@ export default {
   actions: {
     fetchAll ({ commit }) {
       commit('setLoading')
-      fetch(new AuthenticatedRequest('/api/ethograms'))
+      fetch(fixturesOrLiveData('live'))
         .then(response => response.json())
         .then(response => commit('setData', { data: response.data }))
         .catch(error => commit('setError', { error }))
