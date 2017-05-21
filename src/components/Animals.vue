@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-washed-blue">
+  <div class="animals">
     <div class="pa4 flex flex-row flex-wrap items-center justify-start">
       <div class="flex-auto pa1 tc">Subjects for {{ observationId }}</div>
     </div>
@@ -20,7 +20,7 @@ import { getSubjectsForLocation } from '@/utils/getEthogramData'
 import { getLocationIdForObservationId } from '@/utils/getObservationData'
 
 export default Vue.component('child', {
-  name: 'locations',
+  name: 'animals',
   props: ['observationId'],
   computed: {
     subjects () {

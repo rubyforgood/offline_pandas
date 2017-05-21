@@ -1,7 +1,7 @@
 <template>
-  <div class='bg-washed-blue'>
-    <div class='pa4 flex flex-row flex-wrap items-center justify-start'>
-      <div class='flex-auto pa1 tc'>Locations</div>
+  <div class="locations">
+    <div class="pa4 flex flex-row flex-wrap items-center justify-start">
+      <div class="flex-auto pa1 tc">Locations</div>
     </div>
     <div v-if='message'>{{ message }}</div>
     <div class='f5 flex flex-row flex-wrap items-center justify-around pa2'>
@@ -11,7 +11,7 @@
         </a>
       </div>
     </div>
-    <a @click='fetchAll' class='link f6 pa1 mv5 b--gray br3 shadow-3 bg-white'>
+    <a @click='fetchEthograms' class='link f6 pa1 mv5 b--gray br3 shadow-3 bg-white'>
       refresh
     </a>
   </div>
