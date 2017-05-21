@@ -23,20 +23,26 @@ describe('main', () => {
       wrapper = subject()
     })
 
-    it('continues to any non-login page', () => {
+    it('continues to any non-login page', done => {
       router.push('/')
 
-      expect(wrapper.$el.className).to.equal('locations')
+      Vue.nextTick(() => {
+        expect(wrapper.$el.className).to.equal('locations')
+        done()
+      })
     })
 
-    it('redirects to root if navigating to login', () => {
+    it('redirects to root if navigating to login', done => {
       router.push('/login')
 
-      expect(wrapper.$el.className).to.equal('locations')
+      Vue.nextTick(() => {
+        expect(wrapper.$el.className).to.equal('locations')
+        done()
+      })
     })
   })
 
-  describe('when user is not authenticated', () => {
+  describe('when user is not authenticated', done => {
     beforeEach(() => {
       auth.user.authenticated = false
     })
@@ -45,7 +51,10 @@ describe('main', () => {
       const wrapper = subject()
       router.push('/')
 
-      expect(wrapper.$el.className).to.equal('login')
+      Vue.nextTick(() => {
+        expect(wrapper.$el.className).to.equal('login')
+        done()
+      })
     })
   })
 })
