@@ -32,7 +32,7 @@ export default {
       commit('setLoading')
       fetch(new AuthenticatedRequest('/api/ethograms'))
         .then(response => response.json())
-        .then(response => commit('setData', { data: [] }))
+        .then(response => commit('setData', { data: response.data }))
         .catch(error => commit('setError', { error }))
     }
   }
